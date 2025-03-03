@@ -16,10 +16,19 @@ public static class Arrays
         // be implemented by another person.
 
         // my code - begin
+        // Step 1: Create an array to store the multiples.
+        // The array needs to have 'length' number of elements.
         var result = new double[length];
+
+        // Step 2: Populate the array with multiples of the given number.
+        // The first element should be 'number' (1 * number)
+        // The second element should be '2 * number'.
+        // The third element should be '3 * number' and so on.
         for (int i = 0; i < length; ++i) {
             result[i] = number * (i+1); // replace this return statement with your own
         } 
+
+        // Step 3: Return the populated array
         return result;
         // my code - end
     }
@@ -39,9 +48,14 @@ public static class Arrays
         // be implemented by another person.
         
         // my code - begin
-        for (var i = 0; i < amount; i++) {
+        // Step1: Look 'amount' times to ratate the list to the right by one position each time.
+        for (var i = 0; i < amount; i++) 
+        {
+        // Step 2: Store the last element of the list (this will be moved to the front).
             var lastElement = data[data.Count-1];
+        // Step 3: Remove the last element from the list.
             data.RemoveAt(data.Count-1);
+        // Step 4: Insert the stored last element at the beginning of the list.
             data.Insert(0, lastElement);
         }
         // my code - end
