@@ -9,7 +9,7 @@ public class PriorityQueueTests
     // Scenario: 3 items are added in the order of High, Low, Medium.
     // The Enqueue function shall add an item (which contains both data and priority) to the back of the queue.
     // Expected Result: High, Low, Medium
-    // Defect(s) Found: 
+    // Defect(s) Found: expected High, actual Low
     
     public void TestPriorityQueue_1()
     {
@@ -37,7 +37,7 @@ public class PriorityQueueTests
     // The Dequeue function shall remove the item with the highest priority and return its value.
     // If there are more than one item with the highest priority, then the item closest to the front of the queue will be removed and its value returned.
     // Expected Result: High1, High2, Medium, Low1, Low2
-    // Defect(s) Found: Order is not correct
+    // Defect(s) Found: Order is not correct, expected High2, acutal High1
     public void TestPriorityQueue_2()
     {
         var high1 = new PriorityItem("High1", 3);
@@ -64,7 +64,7 @@ public class PriorityQueueTests
     [TestMethod]
     // Scenario: If the queue is empty, then an error exception shall be thrown.
     // Expected Result: The queue is empty
-    // Defect(s) found: 
+    // Defect(s) found: nope
     public void TestPriorityQueue_3()
     {
         var priorityQueue = new PriorityQueue();
