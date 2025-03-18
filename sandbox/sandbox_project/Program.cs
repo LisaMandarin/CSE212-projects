@@ -1,13 +1,25 @@
 using System;
+using System.Text.Json;
 
 public class Program
 {
     static void Main(string[] args)
-    {
-        // This project is here for you to use as a "Sandbox" to play around
-        // with any code or ideas you have that do not directly apply to
-        // one of your projects.
+    {   
+        var letters = new [] {'A', 'A', 'B', 'G', 'C', 'G', 'G', 'D', 'B'};
+        var summaryTable = new Dictionary<char, int>();
 
-        Console.WriteLine("Hello Sandbox World!");
+        foreach (var letter in letters)
+        {
+            if (!summaryTable.ContainsKey(letter))
+            {
+                summaryTable[letter] = 1;
+            }
+            else
+            {
+                summaryTable[letter] += 1;
+            }
+        }
+
+        Console.WriteLine(string.Join(", ", summaryTable));
     }
 }
