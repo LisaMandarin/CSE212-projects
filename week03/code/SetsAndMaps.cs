@@ -21,8 +21,19 @@ public static class SetsAndMaps
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
-        // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        var seen = new HashSet<string>();
+        var found = new List<string>();
+        foreach (var word in words)
+        {           
+            var symmetricWord = new string(word.Reverse().ToArray());
+            
+            if (seen.Contains(symmetricWord))
+            {
+                found.Add($"{word}&{symmetricWord}");
+            }
+            seen.Add(word);
+        }
+        return found.ToArray();
     }
 
     /// <summary>
@@ -42,7 +53,15 @@ public static class SetsAndMaps
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
+            var degreeName = fields[3];
+            if (!degrees.ContainsKey(degreeName))
+            {
+                degrees[degreeName] = 1;
+            }
+            else
+            {
+                degrees[degreeName] += 1;
+            }
         }
 
         return degrees;
@@ -66,8 +85,27 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        word1 = word1.ToLower().Replace(" ", "");
+        word2 = word2.ToLower().Replace(" ", "");
+        if (word1.Length != word2.Length)
+            return false;
+
+        var dictionary = new Dictionary<char, int>();
+        for (var i = 0; i < word1.Length; i++)
+        {
+            if (dictionary.ContainsKey(word1[i]))
+                dictionary[word1[i]] ++;
+            else
+                dictionary[word1[i]] = 1;
+        }
+
+        foreach (var c in word2)
+        {
+            if (!dictionary.ContainsKey(c) || dictionary[c] == 0)
+                return false;
+            dictionary[c] --;
+        }
+        return dictionary.Values.All(count => count == 0);
     }
 
     /// <summary>
