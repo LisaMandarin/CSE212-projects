@@ -133,12 +133,25 @@ public static class SetsAndMaps
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
         var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
-
+        var currentDayEarthquakes = new List<string>();
+        foreach (var summary in featureCollection.Features)
+        {
+            var mag = summary.Properties.Magnitude;
+            var place = summary.Properties.Place;
+            var time = summary.Properties.Time;
+            var utcTime = DateTimeOffset.FromUnixTimeMilliseconds(time).UtcDateTime.Date;
+            var today = DateTimeOffset.UtcNow.Date;
+            if (utcTime == today)
+            {
+                currentDayEarthquakes.Add($"{place} - Mag {mag}");
+            }
+        }
         // TODO Problem 5:
         // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
         // 3. Return an array of these string descriptions.
-        return [];
+        
+        return currentDayEarthquakes.ToArray();
     }
 }
